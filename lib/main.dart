@@ -23,18 +23,28 @@ void main() => runApp(MyApp());
 //   }
 // }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    //TODO implement creaatestate
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
   var questionIndex = 0;
 
   void answerQuestion() {
-    questionIndex = questionIndex + 1;
+    setState(() {
+      questionIndex = questionIndex + 1;
+    });
     print(questionIndex);
   }
 
   var questions = [
     'What\'s is your fav color????',
     'What\'s your favorite animal?',
-    'What is you gender?'
+    'What\'s your gender?'
   ];
 
   @override
@@ -66,4 +76,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Session 30 on Udemy
+// Session 37 on Udemy
