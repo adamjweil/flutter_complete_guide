@@ -1,44 +1,32 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
 // void main() {
 //   runApp(MyApp());
 // }
 
 void main() => runApp(MyApp());
 
-// class MyApp extends StatelessWidget {
-//   // var questions = ['What\'s is your fav color>', 'What\'s your favorite animal?', 'What is you gender?'];
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: Text('My First App'),
-//         ), // AppBar
-//         body: Column(
-//
-//         )Text('This is default text'),
-//         ), // Scaaffold
-//       ); // MaterialApp
-//   }
-// }
-
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    //TODO implement creaatestate
-    return MyAppState();
+    // TODO implement createState
+    return _MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
-  var questionIndex = 0;
+class _MyAppState extends State<MyApp> {
+  // '_' turns it into a Private Class
+  // Variables on Classes = PROPERTIES
 
-  void answerQuestion() {
+  var _questionIndex = 0;
+
+  void _answerQuestion() {
     setState(() {
-      questionIndex = questionIndex + 1;
+      _questionIndex = _questionIndex + 1;
     });
-    print(questionIndex);
+    print(_questionIndex);
   }
 
   var questions = [
@@ -56,24 +44,26 @@ class MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text(questions[questionIndex]),
+            Question(
+              questions[_questionIndex]
+              ),
             RaisedButton(
               child: Text('Answer 1'),
-              onPressed: answerQuestion,
+              onPressed: _answerQuestion,
             ),
             RaisedButton(
               child: Text('Answer 2'),
-              onPressed: answerQuestion,
+              onPressed: _answerQuestion,
             ),
             RaisedButton(
               child: Text('Answer 3'),
-              onPressed: answerQuestion,
+              onPressed: _answerQuestion,
             ),
           ],
         ),
-      ), // Scaaffold
-    ); // MaterialApp
+      ),
+    );
   }
 }
 
-// Session 37 on Udemy
+// Session 39 on Udemy
