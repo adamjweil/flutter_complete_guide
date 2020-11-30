@@ -33,18 +33,28 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     const questions = [
-      {'questionText': 'What\'s is your fav color????', 'answers': [
-        'Black', 'Red', ' Green', 'White'],
+      {
+        'questionText': 'What\'s is your fav color????',
+        'answers': ['Black', 'Red', ' Green', 'White'],
       },
-      {'questionText': 'What\'s your favorite animal?', 'answers': [
-        'Dogs', 'Cats', 'Sheep', 'Birds'],
+      {
+        'questionText': 'What\'s your favorite animal?',
+        'answers': ['Dogs', 'Cats', 'Sheep', 'Birds'],
       },
-
-      {'questionText': 'What\'s your gender?', 'answers': [
-        'Male', 'Female', 'Neither', 'Both']
+      {
+        'questionText': 'What\'s your gender?',
+        'answers': ['Male', 'Female', 'Neither', 'Both']
       }
     ];
 
+    final names = ['Max', 'Manu', 'Julie'];
+    final result = names.map((name) => Text(name)).toList();
+    print(result);
+
+    // var dummy = ['Helllo'];
+    // dummy.add('Max');
+    // print(dummy);
+    // questions = [] // does not work if questions is a const
 
     return MaterialApp(
       home: Scaffold(
@@ -56,7 +66,8 @@ class _MyAppState extends State<MyApp> {
             Question(
               questions[_questionIndex]['questionText'],
             ),
-            ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
               return Answer(_answerQuestion, answer);
             }).toList()
           ],
