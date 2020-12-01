@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import './question.dart';
 import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -20,33 +22,39 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // '_' turns it into a Private Class
   // Variables on Classes = PROPERTIES
-
+  final _questions = const [
+    {
+      'questionText': 'What\'s is your fav color????',
+      'answers': ['Black', 'Red', ' Green', 'White'],
+    },
+    {
+      'questionText': 'What\'s your favorite animal?',
+      'answers': ['Dogs', 'Cats', 'Sheep', 'Birds'],
+    },
+    {
+      'questionText': 'What\'s your gender?',
+      'answers': ['Male', 'Female', 'Neither', 'Both']
+    }
+  ];
   var _questionIndex = 0;
 
   void _answerQuestion() {
+    // var aBool = true;
+    // aBool = false;
+
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
     print(_questionIndex);
+    if (_questionIndex < _questions.length) {
+      print('We have more questions!');
+    } else {
+      print('We have no more questions!');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    const questions = [
-      {
-        'questionText': 'What\'s is your fav color????',
-        'answers': ['Black', 'Red', ' Green', 'White'],
-      },
-      {
-        'questionText': 'What\'s your favorite animal?',
-        'answers': ['Dogs', 'Cats', 'Sheep', 'Birds'],
-      },
-      {
-        'questionText': 'What\'s your gender?',
-        'answers': ['Male', 'Female', 'Neither', 'Both']
-      }
-    ];
-
     final names = ['Max', 'Manu', 'Julie'];
     final result = names.map((name) => Text(name)).toList();
     print(result);
@@ -61,16 +69,14 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('My First App'),
         ),
-        body: Column(
-          children: [
-            Question(
-              questions[_questionIndex]['questionText'],
-            ),
-            ...(questions[_questionIndex]['answers'] as List<String>)
-                .map((answer) {
-              return Answer(_answerQuestion, answer);
-            }).toList()
-          ],
+        body: _questionIndex < _questions.length
+        ? Quiz(
+            answerQuestion: _answerQuestion, 
+            questionIndex: _questionIndex,
+            questions: _questions, 
+          )
+        : Center(
+            child: Text('You did it!'),
         ),
       ),
     );
